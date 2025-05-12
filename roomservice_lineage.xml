@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <remote name="gitlab" fetch="https://gitlab.com/" />
+
+    <!-- Pixel 4 -->
+    <project path="device/google/flame" remote="github" name="LineageOS/android_device_google_flame" />
+    <project path="device/google/coral" remote="github" name="LineageOS/android_device_google_coral" />
+    <project path="device/google/gs-common" remote="github" name="LineageOS/android_device_google_gs-common" />
+    <project path="kernel/google/msm-4.14" remote="github" name="LineageOS/android_kernel_google_msm-4.14" />
+    <project path="packages/apps/ElmyraService" remote="github" name="LineageOS/android_packages_apps_ElmyraService" />
+    <project path="vendor/google/flame" remote="github" name="TheMuppets/proprietary_vendor_google_flame" />
+
+    <!-- OnePlus 9 Pro -->
+    <project path="device/oneplus/lemonadep" remote="github" name="LineageOS/android_device_oneplus_lemonadep" />
+    <project path="device/oneplus/sm8350-common" remote="github" name="LineageOS/android_device_oneplus_sm8350-common" />
+    <project path="hardware/oplus" remote="github" name="LineageOS/android_hardware_oplus" />
+    <project path="kernel/oneplus/sm8350" remote="github" name="LineageOS/android_kernel_oneplus_sm8350" />
+    <project path="vendor/oneplus/sm8350-common" remote="github" name="TheMuppets/proprietary_vendor_oneplus_sm8350-common" />
+    <project path="vendor/oneplus/lemonadep" remote="github" name="TheMuppets/proprietary_vendor_oneplus_lemonadep" />
+
+    <!-- Pixel OS Stuff -->
+    <!-- project path="vendor/gapps" name="Uvneshkumar/vendor_gapps" remote="gitlab" revision="vic" /-->
+    <project path="vendor/gms" name="pixelos-aosp/vendor_gms" remote="gitlab" revision="fifteen" />
+    <!-- project path="packages/apps/ParanoidSense" remote="github" name="PixelOS-AOSP/packages_apps_ParanoidSense" revision="fifteen" /-->
+
+    <!-- Evolution-X Stuff -->
+    <project path="packages/apps/FaceUnlock" name="Evolution-X/packages_apps_FaceUnlock" remote="github" revision="vic" />
+</manifest>

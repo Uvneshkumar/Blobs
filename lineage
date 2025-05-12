@@ -2,6 +2,7 @@
     mkdir -p ~/lineage
     cd ~/lineage
     repo init -u https://github.com/LineageOS/android.git -b lineage-22.2 --git-lfs --no-clone-bundle
+    mkdir .repo/local_manifests && wget https://raw.githubusercontent.com/Uvneshkumar/Blobs/refs/heads/main/roomservice_lineage.xml -O .repo/local_manifests/roomservice.xml
     reposync
 
 #   Add Remotes
