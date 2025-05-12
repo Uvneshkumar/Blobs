@@ -1,0 +1,110 @@
+#   Use Local Manifest with pixelos-aosp/vendor_gms
+    mkdir -p ~/lineage
+    cd ~/lineage
+    repo init -u https://github.com/LineageOS/android.git -b lineage-22.2 --git-lfs --no-clone-bundle
+    reposync
+
+#   Add Remotes
+    cd ~/lineage/frameworks/base
+    git remote add pixel_os https://github.com/PixelOS-AOSP/frameworks_base.git
+    git fetch pixel_os
+    git remote add uvnesh https://github.com/Uvneshkumar/android_frameworks_base.git
+    git fetch uvnesh
+    cd ~/lineage/vendor/lineage
+    git remote add pixel_os https://github.com/PixelOS-AOSP/vendor_aosp.git
+    git fetch pixel_os
+    git remote add uvnesh https://github.com/Uvneshkumar/android_vendor_lineage.git
+    git fetch uvnesh
+    git remote add sun https://github.com/SunOS-Project/android_vendor_sun.git
+    git fetch sun
+    cd ~/lineage/system/core
+    git remote add pixel_os https://github.com/PixelOS-AOSP/system_core.git
+    git fetch pixel_os
+    cd ~/lineage/bionic
+    git remote add pixel_os https://github.com/PixelOS-AOSP/bionic.git
+    git fetch pixel_os
+    cd ~/lineage/external/boringssl
+    git remote add pixel_lineage https://github.com/PixelLineage/external_boringssl.git
+    git fetch pixel_lineage
+    cd ~/lineage/system/security
+    git remote add pixel_lineage https://github.com/PixelLineage/system_security.git
+    git fetch pixel_lineage
+
+#   Revert KeyguardSliceView Commits
+    cd ~/lineage/frameworks/base
+    git revert 26a5198b4f69b403eb503ede56a9bc9e4e70b02e
+    git revert dd71dce185016763c9a5ef4480836431e28046d9
+    git revert 86d04ba93efde781c290bca2148111c510e285cf
+    git revert f3318056b2b0615173a24581cc2e1a2afb9361e2
+
+#   Apply SmartSpace commits (Remove the unwanted WRITE_APN_SETTINGS permission)
+    cd ~/lineage/frameworks/base
+    git cherry-pick 3d6560a02dcab4846323f81a820466244ad55c4d
+    git cherry-pick 49daa2cf3baaf89904c9fb584d805d3b09b2c376
+    git cherry-pick ecccdacf0afe34b49710a009a82e4997655c7acb
+    git cherry-pick a06b256674f0367e6c68abeaf1174a6f4c570be5
+    git cherry-pick 390aaf083cece49417fc6ab31b2a2ce72e840494
+
+#   Add Face Unlock and other Patches
+    cd ~/lineage/vendor/lineage
+    git cherry-pick 2ed512b331cd66513b00b1a38d4d1fd9d231cc5e
+    git cherry-pick 3035a632a8ea6a94300da51790a81020a907f0cd
+    git cherry-pick 5966c6a8f3d0e62211717bb97a1071e372f6665a
+    git cherry-pick 2a920a5e74207d1d809ad6acb3ee9fd1bafdf0f3
+    git cherry-pick 2d20b4582f4b74928fafc8385a789d99ffe51c5e
+    git cherry-pick a69e47fc87292e64dabec9794342d1ccce14ff48
+    cd ~/lineage/frameworks/base
+    git cherry-pick 89a88bb7f4fecd72a5cfaae2c2506426e85c1cd8
+    git cherry-pick a4ab862c8952d20fc2b497e2999e9887a5e14050
+    git cherry-pick 6a03ee3d2ebb5cd91e2da383d2befc349efc9ab0
+    git cherry-pick 35663c22b6b1b999288310799f027a91053fb53a
+    git cherry-pick 7cc9ff488f18db6a8994f189843c5735eb493b7b
+    git cherry-pick 0e9418b109747d4a32c97511f383356d8411ccf8
+    git cherry-pick 186fb3a0b8817deb2fe6601a2a163d4a48c2a5cb
+
+#   Add these SafetyNet Patches - https://github.com/PixelOS-AOSP/system_core/commits/fifteen/
+    cd ~/lineage/external/boringssl
+    git cherry-pick c12b32cd790676750e3c01babfbccaba8eac9687
+    cd ~/lineage/system/security
+    git cherry-pick 32ac947f140c0f57dab2d0d23180b4a72496e66c
+    git cherry-pick d39d000fb6a153b44da5f8b992e85522d5225612
+    git cherry-pick 125c4ffe6b34163f590528f99d6d9c10a981aa77
+    git cherry-pick e326e0697c26c33d2f5f54e16cf01100ea80b094
+    git cherry-pick 056c34730157d85d887f1b08f986346c01a975d3
+    cd ~/lineage/system/core
+    git cherry-pick 984c6c063b578aa1c3b5d6d8c59014bac00dbc3b
+    git cherry-pick 1389b3a1122d9b524a6f4daf502641d4f6093bc8
+    git cherry-pick d0b0a1547e1a40f7abe5580399e979b723f1848f
+    git cherry-pick d4f8344613162acfd04d52feef7aabc057561e5d
+
+#   Apply this commit - https://github.com/SunOS-Project/android_vendor_sun/commit/9711e4386019ff586c2b81f504fd05bd1f12804e
+    cd ~/lineage/vendor/lineage
+    git cherry-pick 9711e4386019ff586c2b81f504fd05bd1f12804e
+
+#   Apply these Pixel Patches
+    cd ~/lineage/frameworks/base
+    https://github.com/PixelOS-AOSP/frameworks_base/commits/fifteen/core/java/com/android/internal/util/PropImitationHooks.java
+    cd ~/lineage/bionic
+    https://github.com/PixelOS-AOSP/bionic/commits/fifteen/
+    git cherry-pick 26add4d0a49c881c414eed2d8dcd345817f5e855
+    cd ~/lineage/frameworks/base
+    Then apply this https://github.com/AOSP-Spartan/vendor_extra/blob/master/CertifiedPropsOverlay/res/values/config.xml in core/res/res/values/custom_config.xml
+    nano core/res/res/values/custom_config.xml
+
+#   Apply these local diffs
+    cd ~/lineage
+    echo "include vendor/gms/common/common-vendor.mk" >> device/google/coral/device.mk
+    echo "include vendor/gms/common/common-vendor.mk" >> device/oneplus/lemonadep/device.mk
+    sed -i 's|<item>2944</item>|<item>2480</item>|g' device/oneplus/lemonadep/overlay/OPlusFrameworksResTarget/res/values/config.xml
+    awk 'BEGIN{b=0} /cc_binary {/ {b=1; blk=$0 ORS; next} b && /}/ {blk=blk $0 ORS; if (blk ~ /name: *"dump_debug_info"/) {b=0; next} else {printf "%s", blk; b=0; next}} b {blk=blk $0 ORS; next} !b {print}' hardware/knowles/athletico/sound_trigger_hal/Android.bp > temp && mv temp hardware/knowles/athletico/sound_trigger_hal/Android.bp
+    sed -i 's|com\.android\.soundpicker|com.google.android.soundpicker|g' packages/apps/Settings/res/values/config.xml
+    sed -i '/Maps \\/d' vendor/gms/common/common-vendor.mk; sed -i '/PrebuiltGmail \\/d' vendor/gms/common/common-vendor.mk
+    sed -i 's/STRENGTH_WEAK/STRENGTH_STRONG/g' frameworks/base/services/core/java/com/android/server/biometrics/sensors/face/FaceService.java
+    sed -i 's/DeviceEntryIconView.IconType.LOCK -> isUdfps/DeviceEntryIconView.IconType.LOCK -> true/g' frameworks/base/packages/SystemUI/src/com/android/systemui/keyguard/ui/viewmodel/DeviceEntryIconViewModel.kt
+    rm -rf packages/overlays/Lineage/fonts/etc
+
+#   nano system/core/init/property_service.cpp
+    copy SetSafetyNetProps from https://github.com/PixelLineage/system_core/blob/a15/init/property_service.cpp
+
+#   Make Signing with vendor/lineage-priv - /home/uvnesh/android/uvnesh-trees/_/lineage/lineage-priv.zip - https://gist.github.com/A2L5E0X1/54cb1b3a49030a9ebf8608b4e68073f5
+    cd ~/lineage/vendor; wget https://github.com/Uvneshkumar/Blobs/raw/refs/heads/main/lineage-priv.zip; unzip lineage-priv.zip; rm lineage-priv.zip; cd ~/lineage
