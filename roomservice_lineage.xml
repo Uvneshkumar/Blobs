@@ -25,6 +25,16 @@
     <project path="vendor/oneplus/sm8350-common" remote="github" name="TheMuppets/proprietary_vendor_oneplus_sm8350-common" />
     <project path="vendor/oneplus/lemonadep" remote="github" name="TheMuppets/proprietary_vendor_oneplus_lemonadep" />
 
+    <!-- OnePlus 12 -->
+    <project path="device/oneplus/waffle" remote="github" name="LineageOS/android_device_oneplus_waffle" />
+    <project path="device/oneplus/sm8650-common" remote="github" name="LineageOS/android_device_oneplus_sm8650-common" />
+    <project path="hardware/oplus" remote="github" name="LineageOS/android_hardware_oplus" />
+    <project path="kernel/oneplus/sm8650" remote="github" name="LineageOS/android_kernel_oneplus_sm8650" />
+    <project path="kernel/oneplus/sm8650-devicetrees" remote="github" name="LineageOS/android_kernel_oneplus_sm8650-devicetrees" />
+    <project path="kernel/oneplus/sm8650-modules" remote="github" name="LineageOS/android_kernel_oneplus_sm8650-modules" />
+    <project path="vendor/oneplus/sm8650-common" remote="github" name="TheMuppets/proprietary_vendor_oneplus_sm8650-common" />
+    <project path="vendor/oneplus/waffle" remote="github" name="TheMuppets/proprietary_vendor_oneplus_waffle" />
+
     <!-- Pixel OS Stuff -->
     <!-- project path="vendor/gapps" name="Uvneshkumar/vendor_gapps" remote="gitlab" revision="vic" /-->
     <project path="vendor/gms" name="pixelos-aosp/vendor_gms" remote="gitlab" revision="fifteen" />
