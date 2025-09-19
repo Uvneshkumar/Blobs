@@ -96,6 +96,7 @@
     cd ~/lineage
     echo "include vendor/gms/common/common-vendor.mk" >> device/google/coral/device.mk
     echo "include vendor/gms/common/common-vendor.mk" >> device/oneplus/lemonadep/device.mk
+    echo "include vendor/gms/common/common-vendor.mk" >> device/oneplus/waffle/device.mk
     sed -i 's|<item>2944</item>|<item>2480</item>|g' device/oneplus/lemonadep/overlay/OPlusFrameworksResTarget/res/values/config.xml
     awk 'BEGIN{b=0} /cc_binary {/ {b=1; blk=$0 ORS; next} b && /}/ {blk=blk $0 ORS; if (blk ~ /name: *"dump_debug_info"/) {b=0; next} else {printf "%s", blk; b=0; next}} b {blk=blk $0 ORS; next} !b {print}' hardware/knowles/athletico/sound_trigger_hal/Android.bp > temp && mv temp hardware/knowles/athletico/sound_trigger_hal/Android.bp
     sed -i 's|com\.android\.soundpicker|com.google.android.soundpicker|g' packages/apps/Settings/res/values/config.xml
